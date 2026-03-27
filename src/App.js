@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import API from "./services/api";
+import TaskForm from "./Components/TaskForm";
+import TaskList from "./Components/TaskList";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  const fetchTasks = async () => {
+    const res = await API.get("tasks/");
+    setTasks(res.data.results || res.data); // pagination safe
+  };
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: "20px" }}>
+      <h1>Task Manager</h1>
+      <TaskForm fetchTasks={fetchTasks} />
+      <TaskList tasks={tasks} fetchTasks={fetchTasks} />
     </div>
   );
 }
