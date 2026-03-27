@@ -8,7 +8,7 @@ function App() {
 
   const fetchTasks = async () => {
     const res = await API.get("tasks/");
-    setTasks(res.data.results || res.data); // pagination safe
+    setTasks(res.data.results || res.data); 
   };
 
   useEffect(() => {

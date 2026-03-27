@@ -1,5 +1,5 @@
 import React from "react";
-import API from "./services/api";
+import API from "../services/api";
 
 function TaskList({ tasks, fetchTasks }) {
 
