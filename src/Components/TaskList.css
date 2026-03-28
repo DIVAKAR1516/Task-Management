@@ -1,0 +1,92 @@
+/* TaskList.css */
+
+.task-list {
+  max-width: 700px;
+  margin: 30px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.task-list h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.task-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.task-card h3 {
+  margin: 0 0 8px 0;
+  color: #4a90e2;
+  font-size: 1.3rem;
+}
+
+.task-card p {
+  margin: 4px 0;
+  color: #555;
+  font-size: 1rem;
+}
+
+.task-card .status {
+  font-weight: 600;
+  color: #888;
+}
+
+.task-card button {
+  padding: 8px 14px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.task-card button:first-of-type {
+  background-color: #4caf50;
+  color: white;
+}
+
+.task-card button:first-of-type:hover {
+  background-color: #3e8e41;
+}
+
+.task-card button:last-of-type {
+  background-color: #f44336;
+  color: white;
+}
+
+.task-card button:last-of-type:hover {
+  background-color: #d32f2f;
+}
+
+@media (max-width: 600px) {
+  .task-card {
+    padding: 12px 15px;
+  }
+
+  .task-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .task-card p {
+    font-size: 0.95rem;
+  }
+
+  .task-card button {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+}
