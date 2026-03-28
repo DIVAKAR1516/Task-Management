@@ -1,6 +1,5 @@
 import React from "react";
 import API from "../services/api";
-import './TaskList.css';
 
 function TaskList({ tasks, fetchTasks }) {
 
@@ -21,19 +20,45 @@ function TaskList({ tasks, fetchTasks }) {
     fetchTasks();
   };
 
+  const getBadgeColor = (status) => {
+    if (status === "completed") return "success";
+    if (status === "in-progress") return "warning";
+    return "secondary";
+  };
+
   return (
-    <div className="task-list">
-  <h2>Tasks</h2>
-  {tasks.map((task) => (
-    <div key={task.id} className="task-card">
-      <h3>{task.title}</h3>
-      <p>{task.description}</p>
-      <p className="status">Status: {task.status}</p>
-      <button onClick={() => updateStatus(task)}>Toggle Status</button>
-      <button onClick={() => deleteTask(task.id)}>Delete</button>
+    <div className="row">
+      {tasks.map((task) => (
+        <div className="col-md-4" key={task.id}>
+          <div className="card shadow-sm mb-4">
+            <div className="card-body">
+              <h5 className="card-title">{task.title}</h5>
+              <p className="card-text">{task.description}</p>
+
+              <span className={`badge bg-${getBadgeColor(task.status)}`}>
+                {task.status}
+              </span>
+
+              <div className="mt-3 d-flex justify-content-between">
+                <button
+                  className="btn btn-sm btn-primary"
+                  onClick={() => updateStatus(task)}
+                >
+                  Toggle
+                </button>
+
+                <button
+                  className="btn btn-sm btn-danger"
+                  onClick={() => deleteTask(task.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
-  ))}
-</div>
   );
 }
 

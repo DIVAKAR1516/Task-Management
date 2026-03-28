@@ -9,14 +9,11 @@ function TaskForm({ fetchTasks }) {
     e.preventDefault();
 
     if (!title.trim()) {
-      alert("Title is required");
+      alert("Title required");
       return;
     }
 
-    await API.post("tasks/", {
-      title,
-      description,
-    });
+    await API.post("tasks/", { title, description });
 
     setTitle("");
     setDescription("");
@@ -24,23 +21,31 @@ function TaskForm({ fetchTasks }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Create Task</h2>
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <br />
-      <textarea
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <br />
-      <button type="submit">Add Task</button>
-    </form>
+    <div className="card mb-4 shadow-sm">
+      <div className="card-body">
+        <h4>Add Task</h4>
+
+        <form onSubmit={handleSubmit}>
+          <input
+            className="form-control mb-2"
+            placeholder="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+
+          <textarea
+            className="form-control mb-2"
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+
+          <button className="btn btn-success w-100">
+            Add Task
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
 
