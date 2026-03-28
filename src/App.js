@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import API from "./services/api";
 import TaskForm from "./Components/TaskForm";
 import TaskList from "./Components/TaskList";
-import SearchBar from "./components/SearchBar";
+import SearchBar from "./Components/SearchBar";
 
 function App() {
   const [tasks, setTasks] = useState([]);
