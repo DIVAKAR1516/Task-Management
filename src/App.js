@@ -1,37 +1,33 @@
-import React, { useEffect, useState } from "react";
-import API from "./services/api";
-import TaskForm from "./Components/TaskForm";
-import TaskList from "./Components/TaskList";
-import SearchBar from "./Components/SearchBar";
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
-  const [search, setSearch] = useState("");
-
-  const fetchTasks = async () => {
-    const res = await API.get("tasks/");
-    setTasks(res.data.results || res.data);
-  };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  // 🔍 Filter logic
-  const filteredTasks = tasks.filter((task) =>
-    task.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const token = localStorage.getItem("token");
 
   return (
-    <div className="container mt-4">
-      <h1 className="text-center mb-4">Task Manager 🚀</h1>
+    <BrowserRouter>
+      <Routes>
+        {/* Default Route */}
+        <Route
+          path="/"
+          element={token ? <Navigate to="/dashboard" /> : <Navigate to="/login" />}
+        />
 
-      <SearchBar search={search} setSearch={setSearch} />
+        {/* Public Routes */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
 
-      <TaskForm fetchTasks={fetchTasks} />
-
-      <TaskList tasks={filteredTasks} fetchTasks={fetchTasks} />
-    </div>
+        {/* Protected Route */}
+        <Route
+          path="/dashboard"
+          element={token ? <Dashboard /> : <Navigate to="/login" />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
