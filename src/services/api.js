@@ -1,7 +1,16 @@
 import axios from "axios";
 
+// Determine base URL based on environment
+const getBaseURL = () => {
+  if (process.env.NODE_ENV === 'development') {
+    return "http://localhost:8000/api/";
+  }
+  // Production - replace with your deployed backend URL
+  return "https://your-backend-url.herokuapp.com/api/";
+};
+
 const API = axios.create({
-  baseURL: "http://localhost:8000/api/",
+  baseURL: getBaseURL(),
 });
 
 // Attach token automatically
