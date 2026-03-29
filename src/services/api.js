@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://task-management-2-2a87.onrender.com/api/",
+  baseURL: "http://localhost:8000/api/",
 });
 
-// 🔐 Attach token automatically
+// Attach token automatically
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
 
@@ -14,5 +14,17 @@ API.interceptors.request.use((req) => {
 
   return req;
 });
+
+// Handle token expiration
+API.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default API;

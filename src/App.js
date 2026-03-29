@@ -11,7 +11,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Default Route */}
         <Route
           path="/"
           element={token ? <Navigate to="/dashboard" /> : <Navigate to="/login" />}
